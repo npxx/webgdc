@@ -35,7 +35,7 @@ const BlogItem = ({ post }: { post: Post }) => {
 
         <div className="px-4">
           <h3 className="mb-3.5 mt-7.5 line-clamp-2 inline-block text-lg font-medium text-black duration-300 hover:text-primary dark:text-white dark:hover:text-primary xl:text-itemtitle2">
-            <Link href={`/blog/blog-details`}>
+            <Link href={`/posts/${id}`}>
               {`${title}`}
             </Link>
           
