@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props) {
   }
 }
 
-export async function getHeadings(source) {
+async function getHeadings(source) {
   // Get each line individually, and filter out anything that
   // isn't a heading.
   console.log("THIS IS " + source)
