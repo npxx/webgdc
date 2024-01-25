@@ -40,7 +40,7 @@ const Footer = () => {
                   <Image
                     width={110}
                     height={80}
-                    src="/images/logo/logo-dark.svg"
+                    src="/images/logo/logo-light.svg"
                     alt="Logo"
                     className="hidden dark:block"
                   />
@@ -48,7 +48,7 @@ const Footer = () => {
 
                 <p className="mb-10 mt-5">
                   Studio Centauri.<br></br>
-                  learn. play. create
+                  learn. play. create.
                 </p>
 
                 <p className="mb-1.5 text-sectiontitle uppercase tracking-[5px]">
@@ -179,7 +179,7 @@ const Footer = () => {
                   </ul>
                 </motion.div>
 
-                <motion.div
+                {/* <motion.div
                   variants={{
                     hidden: {
                       opacity: 0,
@@ -239,7 +239,7 @@ const Footer = () => {
                       </button>
                     </div>
                   </form>
-                </motion.div>
+                </motion.div> */}
               </div>
             </div>
           </div>
@@ -247,7 +247,7 @@ const Footer = () => {
 
           {/* <!-- Footer Bottom --> */}
           <div className="flex flex-col flex-wrap items-center justify-center gap-5 border-t border-stroke py-7 dark:border-strokedark lg:flex-row lg:justify-between lg:gap-0">
-            <motion.div
+            {/* <motion.div
               variants={{
                 hidden: {
                   opacity: 0,
@@ -282,7 +282,7 @@ const Footer = () => {
                   </a>
                 </li>
               </ul>
-            </motion.div>
+            </motion.div> */}
 
             <motion.div
               variants={{
@@ -303,7 +303,7 @@ const Footer = () => {
               className="animate_top"
             >
               <p>
-                &copy; {new Date().getFullYear()} Solid. All rights reserved
+                &copy; {new Date().getFullYear()} Studio Centauri. All rights reserved.
               </p>
             </motion.div>
 

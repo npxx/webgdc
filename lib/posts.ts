@@ -36,12 +36,14 @@ const postsDirectory = path.join(process.cwd(), 'posts') // process.cwd() return
 export function getSortedPostsData() {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory) // [ 'pre-rendering.md', 'ssg-ssr.md' ]
+  // console.log(fileNames);
 
   // Get the data from each file
   const allpostsData = fileNames.map((filename) => {
     // Remove ".md" from file name to get id
-    const id = filename.replace(/\.md$/, '') // id = 'pre-rendering', 'ssg-ssr'
-
+    const id = filename.replace(/\.mdx$/, '') // id = 'pre-rendering', 'ssg-ssr'
+    // console.log(filename);
+    // console.log("baba");
     // Read markdown file as string
     const fullPath = path.join(postsDirectory, filename)
     // /Users/ef/Desktop/nextjs-blog/posts/pre-rendering.md
@@ -49,7 +51,7 @@ export function getSortedPostsData() {
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents)
-    const body = matterResult.content
+    const body = matterResult.data.body
 
     // Combine the data with the id
     return {
@@ -93,7 +95,7 @@ export function getAllPostIds() {
   return fileNames.map((fileName) => {
     return {
       params: {
-        id: fileName.replace(/\.md$/, ''),
+        id: fileName.replace(/\.mdx$/, ''),
       },
     }
   })
@@ -104,7 +106,7 @@ export function getAllPostIds() {
 // --------------------------------
 // GET THE DATA OF A SINGLE POST FROM THE ID
 export async function getPostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`)
+  const fullPath = path.join(postsDirectory, `${id}.mdx`)
   const fileContents = fs.readFileSync(fullPath, 'utf8')
 
   // Use gray-matter to parse the post metadata section
@@ -116,10 +118,13 @@ export async function getPostData(id: string) {
     .process(matterResult.content)
   const contentHtml = processedContent.toString()
 
+  const body = matterResult.content
+
   // Combine the data with the id
   return {
     id,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
+    ...(matterResult.data as { date: string; title: string}),
+    body
   }
 }

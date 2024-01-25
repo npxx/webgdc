@@ -14,6 +14,12 @@ const menuData: Menu[] = [
     path: "/posts",
   },
   {
+    id: 6,
+    title: "Team",
+    newTab: false,
+    path: "/submitgame",
+  },
+  {
     id: 3,
     title: "Featured Games",
     newTab: false,
@@ -25,56 +31,55 @@ const menuData: Menu[] = [
     newTab: false,
     path: "/projects",
   },
-  // {
-  //   id: 3,
-  //   title: "Pages",
-  //   newTab: false,
-  //   submenu: [
-  //     {
-  //       id: 31,
-  //       title: "Blog Grid",
-  //       newTab: false,
-  //       path: "/blog",
-  //     },
-  //     {
-  //       id: 34,
-  //       title: "Sign In",
-  //       newTab: false,
-  //       path: "/auth/signin",
-  //     },
-  //     {
-  //       id: 35,
-  //       title: "Sign Up",
-  //       newTab: false,
-  //       path: "/auth/signup",
-  //     },
-  //     {
-  //       id: 35,
-  //       title: "Docs",
-  //       newTab: false,
-  //       path: "/docs",
-  //     },
-  //     {
-  //       id: 35.1,
-  //       title: "Support",
-  //       newTab: false,
-  //       path: "/support",
-  //     },
-  //     {
-  //       id: 36,
-  //       title: "404",
-  //       newTab: false,
-  //       path: "/error",
-  //     },
-  //   ],
-  // },
-
   {
-    id: 3,
-    title: "Support",
+    id: 5,
+    title: "Submit Your Game!",
     newTab: false,
-    path: "/support",
+    path: "/submitgame",
   },
 ];
 
 export default menuData;
+    // {
+    //   id: 3,
+    //   title: "Pages",
+    //   newTab: false,
+    //   submenu: [
+    //     {
+    //       id: 31,
+    //       title: "Blog Grid",
+    //       newTab: false,
+    //       path: "/blog",
+    //     },
+    //     {
+    //       id: 34,
+    //       title: "Sign In",
+    //       newTab: false,
+    //       path: "/auth/signin",
+    //     },
+    //     {
+    //       id: 35,
+    //       title: "Sign Up",
+    //       newTab: false,
+    //       path: "/auth/signup",
+    //     },
+    //     {
+    //       id: 35,
+    //       title: "Docs",
+    //       newTab: false,
+    //       path: "/docs",
+    //     },
+    //     {
+    //       id: 35.1,
+    //       title: "Support",
+    //       newTab: false,
+    //       path: "/support",
+    //     },
+    //     {
+    //       id: 36,
+    //       title: "404",
+    //       newTab: false,
+    //       path: "/error",
+    //     },
+    //   ],
+    // },

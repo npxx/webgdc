@@ -6,11 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import nextLogo from '@/public/next.svg';
 
-const BlogItem = ({ post }: { post: Post }) => {
+const BlogItem = async ({ post }: { post: Post }) => {
   const { id, title, body } = post;
 
   return (
     <>
+
       <motion.div
         variants={{
           hidden: {

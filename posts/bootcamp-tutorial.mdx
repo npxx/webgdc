@@ -1,0 +1,299 @@
+---
+title : "Unity & Game Art Tutorial for Beginners"
+date: '2020-01-01'
+---
+## Setting up an empty Unity Project
+
+
+**Steps:**
+
+1. Open `Unity Hub` and click on `New Project`
+2. Select `2D Core`. Give some `Project Name`. Click on `Create Project`
+3. Wait :)
+
+## Unity Basics
+
+### Creating a Platform
+
+**Steps:**
+
+1. Create a new **2D Game Object** Square.
+<img src="https://i.imgur.com/b1uN8GH.jpg" width = "600px">
+
+2. Change dimensions
+<img src="https://i.imgur.com/rCDHTbz.jpg" width = "300px">
+
+3. Add a `BoxCollider2D` and `Rigidbody2D` using `Add Component` button in the Inspector Window.
+<img src="https://i.imgur.com/uYS4AD0.jpg" width = "300px">
+
+4. Make the Platform `Static`
+<img src="https://i.imgur.com/J3y3NUt.jpg" width = "300px">
+
+
+### But what is a Rigidbody and a Collider?
+
+<hr>
+
+**RigidBody2D** : Makes the body solid and applies Physics on it.
+
+**BoxCollider2D** : For detecting collisions, boundaries, interactions (for rectangular objects)
+
+There are other types of Colliders viz. PolygonCollider, CircleCollider, SphereCollider, CapsuleCollider for corresponding shapes.
+<hr>
+
+5. Add another Square.
+6. Apply RigidBody2D and BoxCollider2D to this Square as well.
+
+The final Scene should look something like this.
+
+<img src="https://i.imgur.com/zn2rlig.jpg" width = "700px">
+
+## Scripting
+
+Create a C\# Script using any code/text editor.
+
+### Movement Script
+
+
+
+
+Given below is a simple movement script of a player in Unity.
+Let's break it down step by step:
+
+1. **Importing Unity Library:** The script starts by importing the "UnityEngine" library. This library provides access to various functions and features of Unity, making it possible to interact with the game engine.
+
+2. **Creating a Class:** The script defines a new class called "Simple2DMovement" that inherits from "MonoBehaviour." In Unity, "MonoBehaviour" is a base class for scripts that allows them to interact with game objects.
+
+3. **Variables:**
+   - `public float moveSpeed = 5f;`: This is a public variable that determines the speed at which the character will move. You can adjust this speed in the Unity Inspector to control how fast the character moves.
+   - `private Rigidbody2D rb;`: This is a private variable that stores a reference to the "Rigidbody2D" component of the character. Rigidbody2D is used to control the character's physics, like movement and collisions.
+
+4. **Start Method:** The "Start" method is called once when the script starts executing. Here's what it does:
+   - `rb = GetComponent<Rigidbody2D>();`: It gets and stores a reference to the character's Rigidbody2D component. This is essential for controlling the character's movement.
+
+5. **Update Method:** The "Update" method is called once per frame. It's the core of the movement logic. Here's how it works:
+   - It initializes two variables, `horizontalInput` and `verticalInput`, to zero.
+   - It checks if specific keys (W, S, A, D) are being held down, and if so, it updates the `horizontalInput` and `verticalInput` values accordingly. For example, if you're pressing W, `verticalInput` becomes 1 (for moving up), and if you're pressing A, `horizontalInput` becomes -1 (for moving left).
+   - It creates a "movement" vector based on the inputs. This vector combines the horizontal and vertical inputs and normalizes it to ensure that diagonal movement isn't faster than horizontal or vertical movement.
+   - Finally, it applies the calculated movement to the character using its Rigidbody2D component's "velocity" property. This makes the character move in the desired direction at the specified speed.
+
+In a nutshell, this script allows you to control the 2D movement of a character within a Unity game. The character can move up, down, left, or right, and you can adjust its movement speed to your liking through the Unity Inspector. The Rigidbody2D component ensures that the character moves realistically in the game world.
+
+
+
+```c
+using UnityEngine;
+
+public class Simple2DMovement : MonoBehaviour
+{
+    public float moveSpeed = 5f;
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        float horizontalInput = 0f;
+        float verticalInput = 0f;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            verticalInput = 1f;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            verticalInput = -1f;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            horizontalInput = -1f;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            horizontalInput = 1f;
+        }
+
+        Vector2 movement = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
+
+        rb.velocity = movement;
+    }
+}
+```
+
+### Jump Script
+
+
+Our Script comprises of the following:
+
+1. **Variables:**
+   - `Rigidbody2D rb;`: This variable represents the physics component of an object that allows it to move around and interact with other objects.
+   - `bool OnGround;`: This variable keeps track of whether the object is on the ground or not.
+   - `public float JumpForce = 100f;`: This variable determines how high the object will jump when the spacebar is pressed. You can change this value to make the jump stronger or weaker.
+
+2. **Start Function:**
+   - This function is called only once when the game is initialised.
+   - `OnGround = true;`: At the start of the game, the script assumes that the object is on the ground.
+   - `rb = GetComponent<Rigidbody2D>();`: It gets the Rigidbody2D component attached to the object, which is necessary to apply forces to it.
+
+3. **Update Function (Runs every frame):**
+   - `if (Input.GetKey(KeyCode.Space) && OnGround)`: Checks if the spacebar is being pressed and if the object is on the ground.
+   - `rb.AddForce(Vector2.up * JumpForce);`: If both conditions are met, it applies an upward force to the object, making it jump. The `JumpForce` determines how high the object will go.
+
+4. **Collision Detection:**
+   - `private void OnCollisionEnter2D(Collision2D collision)`: This function is called when the object collides with something.
+   - `if (collision.gameObject.CompareTag("Ground"))`: It checks if the object collided with something tagged as "Ground".
+   - `OnGround = true;`: If it's the ground, it sets `OnGround` to true, indicating that the object is on the ground.
+
+   - `private void OnCollisionExit2D(Collision2D collision)`: This function is called when the object stops colliding with something.
+   - `if (collision.gameObject.CompareTag("Ground"))`: It checks if the object stopped colliding with something tagged as "Ground".
+   - `OnGround = false;`: If it's the ground, it sets `OnGround` to false, indicating that the object is no longer on the ground.
+
+So, in simple terms, this script allows an object to jump when you press the spacebar, but only if it's currently on the ground. If the object is in the air, it won't jump until it lands again.
+
+
+```c
+using UnityEngine;
+
+public class Jump : MonoBehaviour
+{
+    Rigidbody2D rb;
+    bool OnGround;
+    public float JumpForce = 100f;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        OnGround = true;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Space) && OnGround)
+        {
+            rb.AddForce(Vector2.up * JumpForce);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            OnGround = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            OnGround = false;
+        }
+    }
+}
+```
+
+### Adding tags
+A Tag is a word which you link to one or more GameObjects.
+Tags are intended to identify GameObjects for scripting purposes. We can use them to write script code to find a GameObject by looking for any object that contains our desired Tag.
+
+Add a new Tag as follows and make sure you **select** it too.
+
+<img src="https://i.imgur.com/So52fR7.jpg" width = "400px">
+
+#### Important Things to Note
+
+- Generally, try to keep the Class Name and Script file Name same.
+- Tag names are case-sensitive
+
+SOME IMAGE HERE
+
+Now In Platform Select Ground as its Tag
+
+### Note: Object will not be Automatically tagged if you created tag in its inspector edit.
+
+## Creating Lethal Trap
+
+Now Let us plant some death traps for our player.
+So Let us create another GameObject of shape triangle (You can choose another shape or sprite as you want)
+And Rigidbody2D and Collider to it.
+
+But here instead of Box Collider we will use PolygonCollider2D As below
+
+IMAGEE
+
+Our Scene should look like this now
+
+IMAGE
+
+
+Create Deathtrap scipt as below and attach it to trap(triangle) gameobject to make it a lethal trap
+
+```c
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class Deathtrap : MonoBehaviour
+{
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+            Restart();
+        }
+    }
+
+    public void Restart()
+    {
+        int sceneIndex=SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(sceneIndex);
+    }
+}
+```
+#### This Script is attached to the Death Traps. The Script first detects if the Player has collided with the trap. Then it reloads the scene by calling the `Restart()` function.
+### Now let's break down this Trap Script:
+  - `using UnityEngine.SceneManagement;` imports the necessary Unity libraries required to switch between scenes.
+  - `OnCollisionEnter2D(Collision2D collision)` function is automatically called when there is a collision with a GameObject, where the `collsion` parameter provides information about the collision event, such as which objects were involved in the collision and the collision details.
+  - `Destroy(collision.gameObject)` destroys the player's GameObject when it collides with the death trap.
+  -`SceneManager.GetActiveScene().buildIndex;` returns the index of the current scene.
+  -`SceneManager.LoadScene(sceneIndex);` loads the scene with the passed index as a fresh scene.
+
+  **We Can Duplicate these traps using Ctrl + d **
+
+  ## Collectibles
+
+  We will now add some collectible items like coins.
+So let us Add 2D object Circle and attach rigidbody2D making it static and Circular collider2D
+Since these are collecticles we do not want to collide with them but to ensure movement through them we will make the collider a trigger by checking the IsTrigger bool of collider as shown
+
+
+IMAGEE
+
+Given below is a script to be attached to a collectible item.
+```c
+using UnityEngine;
+
+public class CollectibleItem : MonoBehaviour
+{
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Destroy(gameObject);
+            Debug.Log("Item collected!");
+        }
+    }
+}
+```
+`OnTriggerEnter2D()` is commonly used for implementing gameplay mechanics where objects should interact **without** physically bouncing off each other like in a typical collision. Instead, it's used for events like picking up items, entering trigger zones, or triggering specific behaviors when two objects overlap while one of them is a trigger collider (i.e., the "Is Trigger" checkbox is checked).
+
+With this script, when the player's GameObject with the "Player" tag enters the trigger collider of the collectible item, it will print "Item collected!" to the Unity console, indicating that the item has been collected, and then destroy the collectible item GameObject. You can customize the message in the Debug.Log line to display any information or captions you want.
+
+Finally Our Game should look something like this.
+
+### Yay!

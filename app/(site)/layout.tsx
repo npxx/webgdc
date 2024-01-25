@@ -7,20 +7,20 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import "../globals.css";
-// const inter = Inter({ subsets: ["latin"] });
-import { Open_Sans, Roboto_Mono } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
+// import { Open_Sans, Roboto_Mono } from "next/font/google";
 
-const openSans = Open_Sans({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-opensans',
-})
+// const openSans = Open_Sans({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: '--font-opensans',
+// })
 
-const robotoMono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-mono',
-})
+// const robotoMono = Roboto_Mono({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: '--font-roboto-mono',
+// })
 
 import ToasterContext from "../context/ToastContext";
 
@@ -31,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`dark:bg-black ${openSans.variable}`}>
+      <body className={`dark:bg-black ${inter.className}`}>
         <ThemeProvider
           enableSystem={false}
           attribute="class"

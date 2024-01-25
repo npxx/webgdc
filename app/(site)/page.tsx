@@ -12,10 +12,11 @@ import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Blog from "@/components/Blog";
 import Testimonial from "@/components/Testimonial";
+import ThreeScene from "@/components/ThreeScene/ThreeScene";
 
 export const metadata: Metadata = {
-  title: "Next.js Starter Template for SaaS Startups - Solid SaaS Boilerplate",
-  description: "This is Home for Solid Pro",
+  title: "Studio Centauri",
+  description: "Game Development Club, IITK",
   // other metadata
 };
 
@@ -24,7 +25,7 @@ export default function Home() {
     <main>
       <Hero />
       <Brands />
-      <Feature />
+      {/* <Feature />
       <About />
       <FeaturesTab />
       <FunFact />
@@ -33,7 +34,7 @@ export default function Home() {
       <FAQ />
       <Testimonial />
       <Pricing />
-      <Contact />
+      <Contact /> */}
       <Blog />
     </main>
   );
