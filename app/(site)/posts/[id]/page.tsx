@@ -60,35 +60,6 @@ async function getHeadings(source) {
 }
 
 
-// import * as cheerio from 'cheerio';
-
-// export function parseHTML(htmlContent) {
-//   const $ = cheerio.load(htmlContent);
-//   console.log(htmlContent);
-
-//   const headings = [];
-
-//   for (let i = 1; i <= 6; i++) {
-//     const headingElements = $(`h${i}`);
-//     console.log("i is " + i)
-//     console.log(headingElements);
-
-
-//     headingElements.each((index, element) => {
-//       const headings: { level: number; text: string }[] = [];
-
-//       headings.push({
-//         level: i,
-//         text: $(element).text().trim(),
-//       });
-//     });
-//   }
-
-//   return headings;
-// }
-
-
-
 // -< Post >-
 export default async function Post({ params }: Props) {
   const postData: PostData = await getPostData(params.id);

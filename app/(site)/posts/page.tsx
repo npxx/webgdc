@@ -36,17 +36,6 @@ export default function Posts() {
           {allPostsData.map((post, id)=> (
             
             <>
-            {/* <div hidden> */}
-            {/* <li className={utilStyles.listItem} key={id}> */}
-              {/* <div className='font-medium mb-1 mt-5'> */}
-                {/* <Link href={`/posts/${id}`}>{post.title}</Link> */}
-              {/* </div> */}
-              {/* <br /> */}
-              {/* <small className='text-gray-500 font-medium'> */}
-                {/* <Date dateString={date} /> */}
-              {/* </small> */}
-            {/* </li> */}
-            {/* </div> */}
              <PostItem post={post} key={id}/>
               </>
             ))}
